@@ -7,3 +7,5 @@ A simple implementation of the classic **Snake Game** using HTML, CSS, and JavaS
 - Practice using arrays for managing the snake’s body.
 - Improve event handling by detecting key presses for movement.
 - Implement basic game logic and animations using JavaScript.
+
+! Work in progress – https://jszor.github.io/snake/
