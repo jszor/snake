@@ -1,3 +1,5 @@
+// Drawing the board 
+
 const boardSize = 20;
 const board = document.getElementById('game-board');
 const cells = [];
@@ -20,3 +22,24 @@ function drawBoard() {
 
 drawBoard(); 
 
+// Movement logic
+
+let dx = 1;
+let dy = 0;
+
+document.addEventListener('keydown', (event) => {
+    switch (event.key) {
+        case 'ArrowUp':
+            if (dy === 0) { dx = 0; dy = -1; } // Move up
+            break;
+        case 'ArrowDown':
+            if (dy === 0) { dx = 0; dy = 1; }  // Move down
+            break;
+        case 'ArrowLeft':
+            if (dx === 0) { dx = -1; dy = 0; } // Move left
+            break;
+        case 'ArrowRight':
+            if (dx === 0) { dx = 1; dy = 0; }  // Move right
+            break;
+    }
+});
