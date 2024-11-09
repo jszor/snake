@@ -43,3 +43,28 @@ document.addEventListener('keydown', (event) => {
             break;
     }
 });
+
+// Defining the game loop
+
+function moveSnake() {
+    // Calculate new head position
+    const head = snake[0];
+    const newHead = head + dx + dy * boardSize;
+
+    // Add new head to the front of the snake array
+    snake.unshift(newHead);
+
+    // Check if food is eaten
+    if (newHead === foodPosition) {
+        // Generate new food position if the snake eats food
+        foodPosition = Math.floor(Math.random() * boardSize * boardSize);
+    } else {
+        // Remove the tail if food isn't eaten
+        snake.pop();
+    }
+
+    drawBoard(); // Redraw the board to reflect movement
+}
+
+// Start the game loop
+setInterval(moveSnake, 200); // Move the snake every 200 ms
