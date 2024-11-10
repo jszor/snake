@@ -20,7 +20,7 @@ function drawBoard() {
     cells[foodPosition].classList.add('food');
 }
 
-drawBoard(); 
+drawBoard();
 
 // Movement logic
 
@@ -49,7 +49,27 @@ document.addEventListener('keydown', (event) => {
 function moveSnake() {
     // Calculate new head position
     const head = snake[0];
-    const newHead = head + dx + dy * boardSize;
+    let newHead = head + dx + dy * boardSize;
+
+    // Horizontal Wrap: Left and Right
+    if (newHead % boardSize === -1) { // Moving from left edge
+        newHead += boardSize;
+    } else if (newHead % boardSize === 0 && dx === 1 && head % boardSize === boardSize - 1) { // Moving from right edge
+        newHead -= boardSize;
+    }
+
+    // Vertical Wrap: Top and Bottom
+    if (newHead < 0) { // Moving above the top
+        newHead += boardSize * boardSize; // Wrap to the bottom
+    } else if (newHead >= boardSize * boardSize) { // Moving below the bottom
+        newHead -= boardSize * boardSize; // Wrap to the top
+    }
+
+    // Check for self-collision
+    if (snake.includes(newHead)) {
+        alert("Game Over!");
+        return;
+    }
 
     // Add new head to the front of the snake array
     snake.unshift(newHead);
@@ -66,5 +86,9 @@ function moveSnake() {
     drawBoard(); // Redraw the board to reflect movement
 }
 
+
 // Start the game loop
-setInterval(moveSnake, 200); // Move the snake every 200 ms
+
+setInterval(moveSnake, 200); 
+
+
